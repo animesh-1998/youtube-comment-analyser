@@ -64,6 +64,9 @@ def normalize_text(df):
     """Apply preprocessing to the text data in the dataframe."""
     try:
         df['clean_comment'] = df['clean_comment'].apply(preprocess_comment)
+        df =  df.dropna(subset=["clean_comment"])
+        df['category'] = df['category'].map({-1: 2, 0: 0, 1: 1})
+        df = df.dropna(subset=['category'])
         logger.debug('Text normalization completed')
         return df
     except Exception as e:

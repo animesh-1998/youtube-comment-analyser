@@ -84,20 +84,20 @@ def apply_tfidf(train_data: pd.DataFrame, max_features: int, ngram_range: tuple)
         raise
 
 
-def train_lgbm(X_train: np.ndarray, y_train: np.ndarray, learning_rate: float, max_depth: int, n_estimators: int, reg_alpha:float, reg_lambda:float) -> lgb.LGBMClassifier:
+def train_lgbm(X_train: np.ndarray, y_train: np.ndarray, learning_rate: float, max_depth: int, n_estimators: int) -> lgb.LGBMClassifier:
     """Train a LightGBM model."""
     try:
         best_model = lgb.LGBMClassifier(
             objective='multiclass',
             num_class=3,
             metric="multi_logloss",
+            is_unbalance=True,
             class_weight="balanced",
-            reg_alpha=reg_alpha,  # L1 regularization
-            reg_lambda=reg_lambda,  # L2 regularization
+            reg_alpha=0.1,  # L1 regularization
+            reg_lambda=0.1,  # L2 regularization
             learning_rate=learning_rate,
             max_depth=max_depth,
-            n_estimators=n_estimators,
-            random_state=42
+            n_estimators=n_estimators
         )
         best_model.fit(X_train, y_train)
         logger.debug('LightGBM model training completed')
@@ -130,15 +130,13 @@ def main():
         root_dir = get_root_directory()
 
         # Load parameters from the root directory
-        params = load_params(params_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../params.yaml'))
+        params = load_params(os.path.join(root_dir, 'params.yaml'))
         max_features = params['model_building']['max_features']
         ngram_range = tuple(params['model_building']['ngram_range'])
 
         learning_rate = params['model_building']['learning_rate']
         max_depth = params['model_building']['max_depth']
         n_estimators = params['model_building']['n_estimators']
-        reg_alpha = params['model_building']['reg_alpha']
-        reg_lambda = params['model_building']['reg_lambda']
 
         # Load the preprocessed training data from the interim directory
         train_data = load_data(os.path.join(root_dir, 'data/interim/train_processed.csv'))
@@ -147,7 +145,7 @@ def main():
         X_train_tfidf, y_train = apply_tfidf(train_data, max_features, ngram_range)
 
         # Train the LightGBM model using hyperparameters from params.yaml
-        best_model = train_lgbm(X_train_tfidf, y_train, learning_rate, max_depth, n_estimators, reg_alpha, reg_lambda)
+        best_model = train_lgbm(X_train_tfidf, y_train, learning_rate, max_depth, n_estimators)
 
         # Save the trained model in the root directory
         save_model(best_model, os.path.join(root_dir, 'lgbm_model.pkl'))
