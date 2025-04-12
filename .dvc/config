@@ -1,4 +1,4 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = C:\Users\anime\OneDrive\Desktop\dvc_storage
+    url = s3://datascienceanimesh
