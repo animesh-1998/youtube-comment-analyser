@@ -96,6 +96,7 @@ def main():
         
         # Fetch the data from data/raw
         train_data = pd.read_csv('./data/raw/train.csv')
+        print("Train data loaded")
         test_data = pd.read_csv('./data/raw/test.csv')
         logger.debug('Data loaded successfully')
 

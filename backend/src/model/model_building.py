@@ -70,6 +70,7 @@ def apply_tfidf(train_data: pd.DataFrame, max_features: int, ngram_range: tuple)
 
         # Perform TF-IDF transformation
         X_train_tfidf = vectorizer.fit_transform(X_train)
+        print("X_train vectorizer loaded")
 
         logger.debug(f"TF-IDF transformation complete. Train shape: {X_train_tfidf.shape}")
 

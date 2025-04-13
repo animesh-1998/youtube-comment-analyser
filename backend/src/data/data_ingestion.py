@@ -93,6 +93,7 @@ def main():
         # Load parameters from the params.yaml in the root directory
         params = load_params(params_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../params.yaml'))
         test_size = params['data_ingestion']['test_size']
+        print(test_size)
         
         # Load data from the specified URL
         df = load_data(data_url='https://raw.githubusercontent.com/Himanshu-1703/reddit-sentiment-analysis/refs/heads/main/data/reddit.csv')

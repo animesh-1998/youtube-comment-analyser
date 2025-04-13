@@ -5,8 +5,8 @@ stages:
     deps:
     - path: src/data/data_ingestion.py
       hash: md5
-      md5: e23f87e7ae0762c78f09dbb3f2c6c025
-      size: 4332
+      md5: 5826753ac044b36e059d4c140da1df06
+      size: 4358
     params:
       params.yaml:
         data_ingestion.test_size: 0.2
@@ -29,8 +29,8 @@ stages:
       size: 5571089
     - path: src/data/data_preprocessing.py
       hash: md5
-      md5: 0cefc3130796a90ceb7e5e57bdecf9a3
-      size: 4018
+      md5: 503d2291d150c3329aafe703d7c7a5aa
+      size: 4054
     outs:
     - path: data/interim
       hash: md5
@@ -46,8 +46,8 @@ stages:
       size: 4127745
     - path: src/model/model_building.py
       hash: md5
-      md5: 3df6d1ac6c6e22ff9f19df8dbe39bc65
-      size: 5662
+      md5: e69b5243317ea1e6227aab726989f96e
+      size: 5706
     params:
       params.yaml:
         model_building.learning_rate: 0.09
@@ -64,7 +64,7 @@ stages:
       size: 4119824
     - path: tfidf_vectorizer.pkl
       hash: md5
-      md5: 87da222d1aea47e9b3fc1a9bfe86f149
+      md5: df2c34752f7947ded99f086367c93b17
       size: 344169
   model_evaluation:
     cmd: python src/model/model_evaluation.py
@@ -83,25 +83,25 @@ stages:
       size: 4119824
     - path: src/model/model_evaluation.py
       hash: md5
-      md5: 6e5a47d504a10c58ee0db16811962488
-      size: 7345
+      md5: bc5231eff8c6046818a4dce04f5a2541
+      size: 7344
     - path: tfidf_vectorizer.pkl
       hash: md5
-      md5: 87da222d1aea47e9b3fc1a9bfe86f149
+      md5: df2c34752f7947ded99f086367c93b17
       size: 344169
     outs:
     - path: experiment_info.json
       hash: md5
-      md5: ff76262059d334c4df5fe9738b5e6d31
+      md5: ea027b21d2f7a0a7d09bf880a4a46812
       size: 87
   model_registration:
     cmd: python src/model/register_model.py
     deps:
     - path: experiment_info.json
       hash: md5
-      md5: ff76262059d334c4df5fe9738b5e6d31
+      md5: ea027b21d2f7a0a7d09bf880a4a46812
       size: 87
     - path: src/model/register_model.py
       hash: md5
-      md5: d872501f00f78e12a5d1d864cb7e8aef
-      size: 2477
+      md5: d1436d9da9a4d00a9641b83efb28e76a
+      size: 2476
