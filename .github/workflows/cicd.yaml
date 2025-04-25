@@ -94,6 +94,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
         run: |
+          cd backend
           pytest scripts/test_model_performance.py
 
       # - name: Promote model to production
