@@ -77,7 +77,7 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
         run: |
           cd backend
-          pytest scripts/test_load_model.py
+          pytest scripts/test_model_load.py
 
       # - name: Run model signature test
       #   env:
