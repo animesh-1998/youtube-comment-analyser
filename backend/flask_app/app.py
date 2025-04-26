@@ -20,6 +20,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from mlflow.tracking import MlflowClient
 import matplotlib.dates as mdates
+import os
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -67,7 +68,7 @@ def load_model_and_vectorizer(model_name, model_version, vectorizer_path):
 model, vectorizer = load_model_and_vectorizer(
     "yt_chrome_plugin_model",
     "3",
-    r"C:\Users\anime\Desktop\Youtube Comment Analysis\youtube_comment_analyser\backend\tfidf_vectorizer.pkl"
+    os.path.join(os.path.dirname(__file__), "tfidf_vectorizer.pkl")
 )  # Update paths and versions as needed
 print(model,vectorizer)
 
