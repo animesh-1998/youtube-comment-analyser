@@ -56,7 +56,7 @@ def preprocess_comment(comment):
 # Load the model and vectorizer from the model registry and local storage
 def load_model_and_vectorizer(model_name, model_version, vectorizer_path):
     # Set MLflow tracking URI to your server
-    mlflow.set_tracking_uri("http://ec2-16-16-186-5.eu-north-1.compute.amazonaws.com:5000/")  # Replace with your MLflow tracking URI
+    mlflow.set_tracking_uri("http://ec2-51-20-60-173.eu-north-1.compute.amazonaws.com:5000/")  # Replace with your MLflow tracking URI
     client = MlflowClient()
     model_uri = f"models:/{model_name}/{model_version}"
     model = mlflow.pyfunc.load_model(model_uri)
@@ -67,7 +67,7 @@ def load_model_and_vectorizer(model_name, model_version, vectorizer_path):
 model, vectorizer = load_model_and_vectorizer(
     "yt_chrome_plugin_model",
     "3",
-    "C:/Users/anime/Desktop/Youtube Comment Analysis/youtube_comment_analyser/backend/tfidf_vectorizer.pkl"
+    r"C:\Users\anime\Desktop\Youtube Comment Analysis\youtube_comment_analyser\backend\tfidf_vectorizer.pkl"
 )  # Update paths and versions as needed
 print(model,vectorizer)
 
